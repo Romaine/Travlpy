@@ -4,7 +4,7 @@ TFL
 Transport for London API Command Line Interface - TFL data + python + n00b + argparse module + me = funstuffs!
 
 I decided to learn python because Darren Kitchen of Hak5 said It's awesome stuff.  I decided to check it out 
-and, indeed, it's positively awesome stuff!  I only know a little of few languages - Javascrpt, Java, PHP and Autoit
+and, indeed, it's positively awesome stuff!  I only know a little of few languages - Javascript, Java, PHP and Autoit
 
 I was watching a defcon talk on youtube presented by a guy who made a tool to map SCADA systems using the MODBUS
 protocol that uses pythons option handling library so it works like nmap.  Somehow that leads to me wanting to 
