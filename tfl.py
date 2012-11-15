@@ -3,7 +3,7 @@ import xml.dom.minidom as xDom
 
 def printer2(args):
         #road = raw_input("Choose a bus stop: ")
-        api = urllib.urlopen("http://countdown.api.tfl.gov.uk/interfaces/ura/instant_V1?stoppointname=" + args,road)
+        api = urllib.urlopen("http://countdown.api.tfl.gov.uk/interfaces/ura/instant_V1?stoppointname=" + args.road)
         print "\n"
 
         sysTime = api.readline()
@@ -31,6 +31,7 @@ def printer2(args):
 parser = argparse.ArgumentParser(description='An argparse test script')
 
 parser.add_argument("-n", "--name", dest="action", action='store_const', const=printer2, help='Print bus timetable for given bus')
+parser.add_argument("road", help="the road")
 
 args = parser.parse_args()
 
