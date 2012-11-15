@@ -1,13 +1,40 @@
 import argparse, urllib, time, json
 import xml.dom.minidom as xDom
 
+def printer2(args):
+        #road = raw_input("Choose a bus stop: ")
+        api = urllib.urlopen("http://countdown.api.tfl.gov.uk/interfaces/ura/instant_V1?stoppointname=" + args,road)
+        print "\n"
+
+        sysTime = api.readline()
+        sysTime = json.loads(sysTime)
+        sysTime = sysTime[2]
+        
+        lines = api.readlines()
+        for line in lines:
+                line = json.loads(line)
+                #print line
+                bus = line[2]
+                busTime = line[3]
+                eta = busTime - sysTime
+                eta = eta / 1000
+                eta = eta / 60
+                
+                if eta == 0:
+                        eta = "Due"
+                        
+                bus = str(bus)
+                eta = str(eta)
+                display = bus + eta.rjust(len(eta) - len(bus) + 8)
+                print display
+
 parser = argparse.ArgumentParser(description='An argparse test script')
-#parser.add_argument('integers', metavar='N', type=int, nargs='+',
-#                   help='an integer for the accumulator')
-#parser.add_argument('--sum', dest='accumulate', action='store_const',
-#                   const=sum, default=max,
-#                   help='sum the integers (default: find the max)')
-#
+
+parser.add_argument("-n", "--name", dest="action", action='store_const', const=printer2, help='Print bus timetable for given bus')
+
+args = parser.parse_args()
+
+args.action(args)
 
 def printer():
         i = 3
@@ -18,6 +45,7 @@ def printer():
         sysTime = api.readline()
         sysTime = json.loads(sysTime)
         sysTime = sysTime[2]
+        
         lines = api.readlines()
         for line in lines:
                 line = json.loads(line)
@@ -27,8 +55,10 @@ def printer():
                 eta = busTime - sysTime
                 eta = eta / 1000
                 eta = eta / 60
+                
                 if eta == 0:
                         eta = "Due"
+                        
                 bus = str(bus)
                 eta = str(eta)
                 display = str(bus) + str(eta).rjust(len(eta) - len(bus) + 8)
@@ -86,15 +116,14 @@ def getLineCodes():
         
 
 
-parser.add_argument('-p','--parse', dest='ptext', action='store_const',
-                    const=printer,
-                    help='print epochs')
+#parser.add_argument('-p','--parse', dest='ptext', action='store_const',
+#                    const=printer,
+#                    help='print epochs')
 
-parser.add_argument('-l','--lines', dest='line', action='store_const',
-                    const=linesStatus,
-                    help='print line statuses')
+#parser.add_argument('-l','--lines', dest='line', action='store_const',
+#                    const=linesStatus,
+#                    help='print line statuses')
 
-args = parser.parse_args()
 
 #parser.parse_args()
 #args.pline()#
