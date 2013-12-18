@@ -10,4 +10,4 @@ I was watching a defcon talk on youtube presented by a guy who made a tool to ma
 protocol that uses pythons option handling library so it works like nmap.  Somehow that leads to me wanting to 
 check when my bus is going to arrive using the command line with flags and stuff.
 
-Try and excuse the commented code and the not workyness of my code :)
+Please try to excuse the commented code its overall not workyness :)
