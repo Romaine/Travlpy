@@ -1,4 +1,4 @@
-TFL
+Travlpy
 ===
 
 Transport for London API Command Line Interface - TFL data + python + n00b + argparse module + me = funstuffs!
