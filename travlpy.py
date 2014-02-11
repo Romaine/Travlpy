@@ -19,6 +19,7 @@ def animation(scr):
         scr.clear()
 
 def main():
+    print 'hi'
     scr = initscr()
     noecho()
     curs_set(0)

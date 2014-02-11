@@ -1,0 +1,4 @@
+#!/usr/bin/env python
+
+return_list = [StopPointName, StopID, StopCode1, StopCode2, StopPointState, StopPointType, StopPointIndicator, Towards, Bearing, Latitude, Longitude, VisitNumber, TripID, VehicleID, RegistrationNumber, LineID, LineName, DirectionID, DestinationText, DestinationName, EstimatedTime, MessageUUID, MessageText, MessageType, MessagePriority, StartTime, ExpireTime, BaseVersion]
+
