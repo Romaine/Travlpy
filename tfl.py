@@ -12,27 +12,55 @@ class Bus():
         print "\n"
 
         sysTime = api.readline()
-        print sysTime
         sysTime = json.loads(sysTime)
         sysTime = sysTime[2]
-        print sysTime 
         lines = api.readlines()
+        
+        data = []
+
+        for raw in lines:
+            raw = json.loads(raw)
+            print raw
+
+        print
+        
+        
+        ## Schema idea
+
+        
+        timetable = [{"epoch" : {"route" : 0, "stop" : '',}}]
+
+        ## Schema attempt
+
         for line in lines:
-                line = json.loads(line)
-                #print line
-                bus = line[2]
-                busTime = line[3]
-                eta = busTime - sysTime
-                eta = eta / 1000
-                eta = eta / 60
-                    
-                if eta == 0:
-                    eta = "Due"
+            line = json.loads(line)
+            data.append({ line[3] : {"route": line[2], "stop" : line[1] } })
+            
+
+
+        for line in lines:
+
+
+
+            line = json.loads(line)
+            bus = line[2]
+            busTime = line[3]
+            eta = busTime - sysTime
+            eta = eta / 1000
+            eta = eta / 60
+                
+            if eta == 0:
+                eta = "Due"
                         
-                bus = str(bus)
-                eta = str(eta)
-                display = bus + eta.rjust(len(eta) - len(bus) + 8)
-                print display
+            bus = str(bus)
+            eta = str(eta)
+            
+            
+
+            display = bus + eta.rjust(len(eta) - len(bus) + 8)
+            print display
+
+        print data
                     
 
 
