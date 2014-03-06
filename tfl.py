@@ -1,21 +1,30 @@
-import argparse, urllib, time, json
+import argparse, time, json
 import xml.dom.minidom as xDom
+import urllib2 as net
 
 print 'test'
 
 class Bus():
-    apiurl = "http://countdown.api.tfl.gov.uk/interfaces/ura/instant_V1?stoppointname="
+    "Interface for TFL bus response"
+
+    responseurl = "http://countdown.api.tfl.gov.uk/interfaces/ura/instant_V1?"
 
     def eta(self, args):
             
-        api = urllib.urlopen(self.apiurl + args)
-        print "\n"
+        req = net.Request(self.responseurl, "stoppointname=" + args)
 
-        sysTime = api.readline()
+        print "got past Request"
+
+        response = net.urlopen(req)
+        #print response.read()
+
+        
+
+        sysTime = response.readline()
         sysTime = json.loads(sysTime)
         sysTime = sysTime[2]
-        lines = api.readlines()
-        
+        lines = response.readlines()
+
         data = []
 
         for raw in lines:
@@ -34,7 +43,7 @@ class Bus():
 
         for line in lines:
             line = json.loads(line)
-            data.append({ line[3] : {"route": line[2], "stop" : line[1] } })
+            data.append({ line[3] : {"route" : line[2], "stop" : line[1] }})
             
 
 
@@ -58,21 +67,23 @@ class Bus():
             
 
             display = bus + eta.rjust(len(eta) - len(bus) + 8)
-            print display
+            #print display
 
         print data
+        #print net.HTTPError.read()
+
                     
 
 
     def busTimes():
-            api = urllib.urlopen("http://countdown.api.tfl.gov.uk/interfaces/ura/instant_V1?stoppointname=barking road").read()
+            response = net.urlopen("http://countdown.api.tfl.gov.uk/interfaces/ura/instant_V1?stoppointname=barking road").read()
             
-            for line in api:
+            for line in response:
                     print bus
 
     def lineStatus():
-            api = urllib.urlopen("http://cloud.tfl.gov.uk/TrackerNet/LineStatus").read()
-            xData = xDom.parseString(api)
+            response = net.urlopen("http://cloud.tfl.gov.uk/TrackerNet/LineStatus").read()
+            xData = xDom.parseString(response)
             arrayOfLineStatus = xData.getElementsByTagName("ArrayOfLineStatus")[0]
             lineStatus = arrayOfLineStatus.getElementsByTagName("LineStatus")
             gs = 0
