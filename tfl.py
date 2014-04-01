@@ -7,18 +7,20 @@ print 'test'
 class Bus():
     "Interface for TFL bus response"
 
-    responseurl = "http://countdown.api.tfl.gov.uk/interfaces/ura/instant_V1?"
+    url = "http://countdown.api.tfl.gov.uk/interfaces/ura/instant_V1?"
+    returnlist = {"ReturnList" : ["StopPointName", "StopID", "StopCode1",
+                                    "StopCode2", "StopPointState", "StopPointType", "StopPointIndicator",
+                                    "Towards", "Bearing", "Latitude","Longitude", "VisitNumber",
+                                    "TripID", "VehicleID", "RegistrationNumber", "LineID", "LineName",
+                                    "DirectionID", "DestinationText", "DestinationName", "EstimatedTime",
+                                    "MessageUUID", "MessageText", "MessageType", "MessagePriority",
+                                    "StartTime", "ExpireTime", "BaseVersion"]}
 
     def eta(self, args):
             
-        req = net.Request(self.responseurl, "stoppointname=" + args)
-
-        print "got past Request"
+        req = net.Request(self.url, "stoppointname=" + args)
 
         response = net.urlopen(req)
-        #print response.read()
-
-        
 
         sysTime = response.readline()
         sysTime = json.loads(sysTime)
@@ -28,6 +30,7 @@ class Bus():
         data = []
 
         for raw in lines:
+
             raw = json.loads(raw)
             print raw
 
@@ -67,9 +70,10 @@ class Bus():
             
 
             display = bus + eta.rjust(len(eta) - len(bus) + 8)
-            #print display
+            print display
 
-        print data
+        for bus in data:
+            print bus.items() 
         #print net.HTTPError.read()
 
                     
