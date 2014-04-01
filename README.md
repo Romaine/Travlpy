@@ -11,3 +11,6 @@ protocol that uses pythons option handling library so it works like nmap.  Someh
 check when my bus is going to arrive using the command line with flags and stuff.
 
 Please try to excuse the commented code its overall not workyness :)
+
+I write this when i have nothing better to do, progress is i sign if my bordom :P
+Data handling apparently cures boredom? Erm, yeah.  You'll get better logic out of me in the actual code.
